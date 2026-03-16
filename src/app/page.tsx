@@ -15,17 +15,16 @@ export default async function Home() {
           <span className="text-xl font-bold text-red-700">UNS</span>
           <span className="text-xl font-bold text-blue-900">Collab</span>
         </div>
-        <div className="gap-4">
-          <Link href="/projects/create" className="text-gray-700 hover:text-blue-700 font-medium">
-            Buat Project
-          </Link>
-        </div>
+        <ul className="flex gap-6 list-none">
+          <li><Link href="/" className="text-gray-700 hover:text-blue-700 font-medium transition-colors">Home</Link></li>
+          <li><Link href="/projects/create" className="text-gray-700 hover:text-blue-700 font-medium transition-colors">Buat Project</Link></li>
+        </ul>
       </nav>
 
       {/* Hero Section */}
       <main className="max-w-4xl mx-auto px-6 py-16 text-center">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
-          Temukan Rekan Untuk Berbagai Kebutuhan Akademikmu
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+          Temukan Rekan Untuk Berbagai<br />Kebutuhan Akademikmu
         </h1>
         <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
           Wadah kolaborasi aman & terstruktur untuk mahasiswa aktif Universitas Sebelas Maret
@@ -34,17 +33,17 @@ export default async function Home() {
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Link 
             href="/projects/create" 
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
+            className="inline-block w-full sm:w-auto px-8 py-3 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors text-center"
           >
             Cari Partner Sekarang
           </Link>
           
-          <Link 
+          <a 
             href="#browse" 
-            className="px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors"
+            className="inline-block w-full sm:w-auto px-8 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors text-center"
           >
             Lihat Project
-          </Link>
+          </a>
         </div>
 
         {/* Project Grid - DATA NYA DARI DATABASE */}
@@ -57,7 +56,7 @@ export default async function Home() {
                 <p className="text-sm text-gray-600 mt-1">Kategori: {project.category}</p>
                 <p className="text-sm text-gray-600">Deadline: {new Date(project.end_date).toLocaleDateString()}</p>
                 
-                {/* ✅ GUNAKAN <a> TAG INI DI SINI */}
+                {/* TOMBOL LIHAT DETAIL - DIPAKAI <a> TAG */}
                 <a 
                   href={`/projects/${project.id}`} 
                   className="mt-4 inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium hover:bg-blue-200 transition-colors cursor-pointer"
