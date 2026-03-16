@@ -1,13 +1,12 @@
-'use client' // Tambahkan ini jika pakai hook/interactif
-import './globals.css'
-import { supabase } from '@/lib/supabase' // Atau '../../lib/supabase'
+'use client' // ← Tambahkan jika pake hook
+import './globals.css' // ← WAJIB ADA INI DI BARIS TERATAS!
+import type { Metadata } from 'next'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="antialiased">
-        {/* Nav Bar + Children */}
-        {children}
+        {children} {/* ⭐ WAJIB ADA INI */}
       </body>
     </html>
   );
