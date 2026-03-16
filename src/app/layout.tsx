@@ -1,4 +1,5 @@
 'use client' // Tambahkan ini jika pakai hook/interactif
+import './globals.css'
 import { supabase } from '@/lib/supabase' // Atau '../../lib/supabase'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
