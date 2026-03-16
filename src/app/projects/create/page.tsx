@@ -1,5 +1,5 @@
+import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
-// ... kode lainnya
 
 export default async function Home() {
   const { data: projects } = await supabase
@@ -57,13 +57,13 @@ export default async function Home() {
                 <p className="text-sm text-gray-600 mt-1">Kategori: {project.category}</p>
                 <p className="text-sm text-gray-600">Deadline: {new Date(project.end_date).toLocaleDateString()}</p>
                 
-                {/* ✅ TOMBOL LIHAT DETAIL YANG BENAR */}
-                <Link 
+                {/* ✅ GUNAKAN <a> TAG INI DI SINI */}
+                <a 
                   href={`/projects/${project.id}`} 
-                  className="mt-4 inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium hover:bg-blue-200 transition-colors"
+                  className="mt-4 inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium hover:bg-blue-200 transition-colors cursor-pointer"
                 >
                   Lihat Details
-                </Link>
+                </a>
               </div>
             ))
           ) : (
