@@ -1,7 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase' // ← Gunakan alias @
+// ✅ Relative Path (Lebih stabil di Vercel Production)
+import { supabase } from '../../lib/supabase'
 
 interface ProjectData {
   id: string
@@ -26,8 +27,6 @@ export default function ProjectDetailPage() {
     
     const fetchProject = async () => {
       try {
-        console.log('Fetching project:', params.id)
-        
         const { data, error: dbError } = await supabase
           .from('projects')
           .select('*')
@@ -35,10 +34,7 @@ export default function ProjectDetailPage() {
           .single()
 
         if (dbError) throw dbError
-        if (data) {
-          console.log('Project data received:', data)
-          setProject(data as ProjectData)
-        }
+        if (data) setProject(data as ProjectData)
       } catch (err: any) {
         console.error('Error fetching project:', err)
         setError(err.message || 'Gagal memuat data proyek')
