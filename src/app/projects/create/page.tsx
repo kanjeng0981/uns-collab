@@ -1,8 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-// ✅ Relative Path (Lebih stabil di Vercel Production)
-import { supabase } from '../../lib/supabase'
+import { supabase } from '@/lib/supabase'
 
 export default function CreateProjectPage() {
   const router = useRouter()
@@ -21,7 +20,6 @@ export default function CreateProjectPage() {
     setLoading(true)
 
     try {
-      // Simpan data ke tabel projects
       const { error } = await supabase.from('projects').insert([{
         title: formData.title,
         description: formData.description,
@@ -57,7 +55,6 @@ export default function CreateProjectPage() {
         <h1 className="text-3xl font-bold text-gray-900 mb-8">Buat Project Baru</h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Judul */}
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
               Nama Proyek *
@@ -73,7 +70,6 @@ export default function CreateProjectPage() {
             />
           </div>
 
-          {/* Deskripsi */}
           <div>
             <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
               Deskripsi Detail *
@@ -89,7 +85,6 @@ export default function CreateProjectPage() {
             />
           </div>
 
-          {/* Kategori */}
           <div>
             <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
               Kategori *
@@ -106,7 +101,6 @@ export default function CreateProjectPage() {
             </select>
           </div>
 
-          {/* Deadline */}
           <div>
             <label htmlFor="deadline" className="block text-sm font-medium text-gray-700 mb-2">
               Deadline Pengumpulan *
@@ -121,7 +115,6 @@ export default function CreateProjectPage() {
             />
           </div>
 
-          {/* Jumlah Anggota */}
           <div>
             <label htmlFor="max_members" className="block text-sm font-medium text-gray-700 mb-2">
               Jumlah Anggota Tim *
@@ -138,7 +131,6 @@ export default function CreateProjectPage() {
             />
           </div>
 
-          {/* WhatsApp Link */}
           <div>
             <label htmlFor="wa_link" className="block text-sm font-medium text-gray-700 mb-2">
               Nomor WhatsApp *
@@ -156,7 +148,6 @@ export default function CreateProjectPage() {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
