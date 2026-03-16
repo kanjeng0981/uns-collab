@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 // ✅ Ganti ini jadi relative path jika @ belum jalan
-import { supabase } from '../../lib/supabase'
+import { supabase } from '@/lib/supabase'
 
 export default function CreateProjectPage() {
   const router = useRouter()
