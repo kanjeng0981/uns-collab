@@ -1,8 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
-// ✅ Relative Path (Lebih stabil di Vercel Production)
-import { supabase } from '../../lib/supabase'
+import { supabase } from '@/lib/supabase'
 
 interface ProjectData {
   id: string
@@ -46,7 +45,6 @@ export default function ProjectDetailPage() {
     fetchProject()
   }, [params.id])
 
-  // Loading State
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -58,7 +56,6 @@ export default function ProjectDetailPage() {
     )
   }
 
-  // No Data Error
   if (!project) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -76,7 +73,6 @@ export default function ProjectDetailPage() {
     )
   }
 
-  // Helper functions
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '-'
     return new Date(dateString).toLocaleDateString('id-ID', {
@@ -103,7 +99,6 @@ export default function ProjectDetailPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        {/* Back Button */}
         <button 
           onClick={() => router.back()} 
           className="mb-6 inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium transition-colors"
@@ -111,14 +106,12 @@ export default function ProjectDetailPage() {
           ← Kembali
         </button>
         
-        {/* Header Card */}
         <div className="bg-white rounded-lg shadow-md p-8 mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-3">{project.title}</h1>
           <p className="text-sm text-gray-600 mb-4">
             <span className="font-semibold">Kategori:</span> {project.category || '-'}
           </p>
 
-          {/* Info Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className={`p-4 rounded-md ${isDeadlineNear() ? 'bg-red-50 border border-red-200' : 'bg-blue-50'}`}>
               <h3 className={`font-semibold text-sm mb-1 ${isDeadlineNear() ? 'text-red-800' : 'text-blue-800'}`}>📅 Deadline:</h3>
@@ -131,7 +124,6 @@ export default function ProjectDetailPage() {
             </div>
           </div>
 
-          {/* Description */}
           <div className="mb-6">
             <h3 className="font-semibold text-gray-700 mb-2">Deskripsi:</h3>
             <p className="text-gray-600 bg-gray-50 p-4 rounded-md leading-relaxed">
@@ -139,7 +131,6 @@ export default function ProjectDetailPage() {
             </p>
           </div>
 
-          {/* WhatsApp CTA Section */}
           <div className="mt-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg">
             <h3 className="font-semibold text-green-800 mb-3 flex items-center gap-2">
               💬 Hubungi Creator:
@@ -162,7 +153,6 @@ export default function ProjectDetailPage() {
             )}
           </div>
 
-          {/* Created At Info */}
           <div className="mt-6 pt-4 border-t border-gray-200 text-xs text-gray-500">
             Dibuat pada {new Date(project.created_at || '').toLocaleString('id-ID')}
           </div>
