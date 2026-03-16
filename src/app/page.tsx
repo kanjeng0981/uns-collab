@@ -1,6 +1,12 @@
 import Link from 'next/link'
+import { supabase } from '@/lib/supabase'
 
-export default function Home() {
+export default async function Home() {
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('*')
+    .order('created_at', { ascending: false })
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
       {/* Navbar */}
@@ -41,26 +47,33 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Project Grid Placeholder */}
+        {/* Project Grid - DATA NYA DARI DATABASE */}
         <div id="browse" className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
-          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-            <h3 className="font-bold text-lg text-gray-800">Judul Proyek A</h3>
-            <p className="text-sm text-gray-600 mt-2">Jurusan: Sistem Informasi</p>
-            <p className="text-sm text-gray-600">Status: Open</p>
-            <button className="mt-4 px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium">Lihat Details</button>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-            <h3 className="font-bold text-lg text-gray-800">Judul Proyek B</h3>
-            <p className="text-sm text-gray-600 mt-2">Jurusan: Ekonomi</p>
-            <p className="text-sm text-gray-600">Status: Open</p>
-            <button className="mt-4 px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium">Lihat Details</button>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
-            <h3 className="font-bold text-lg text-gray-800">Judul Proyek C</h3>
-            <p className="text-sm text-gray-600 mt-2">Jurusan: Teknik Informatika</p>
-            <p className="text-sm text-gray-600">Status: Full</p>
-            <button className="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium disabled" disabled>Lihat Details</button>
-          </div>
+          {projects && projects.length > 0 ? (
+            projects.map((project) => (
+              <div key={project.id} className="bg-white p-6 rounded-lg shadow-md border border-gray-100">
+                <h3 className="font-bold text-lg text-gray-800 truncate">{project.title}</h3>
+                <p className="text-sm text-gray-600 mt-2 line-clamp-2">{project.description}</p>
+                <p className="text-sm text-gray-600 mt-1">Kategori: {project.category}</p>
+                <p className="text-sm text-gray-600">Deadline: {new Date(project.end_date).toLocaleDateString()}</p>
+                
+                {/* ✅ GUNAKAN <a> TAG INI DI SINI */}
+                <a 
+                  href={`/projects/${project.id}`} 
+                  className="mt-4 inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium hover:bg-blue-200 transition-colors cursor-pointer"
+                >
+                  Lihat Details
+                </a>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12 bg-white rounded-lg border border-dashed border-gray-300">
+              <p className="text-gray-500">Belum ada project. Jadilah yang pertama!</p>
+              <Link href="/projects/create" className="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                Buat Project Pertama
+              </Link>
+            </div>
+          )}
         </div>
       </main>
     </div>
