@@ -46,7 +46,7 @@ export default async function Home() {
           </a>
         </div>
 
-        {/* Project Grid - DATA NYA DARI DATABASE */}
+        {/* Project Grid - DATA DARI DATABASE */}
         <div id="browse" className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
           {projects && projects.length > 0 ? (
             projects.map((project) => (
@@ -56,7 +56,7 @@ export default async function Home() {
                 <p className="text-sm text-gray-600 mt-1">Kategori: {project.category}</p>
                 <p className="text-sm text-gray-600">Deadline: {new Date(project.end_date).toLocaleDateString()}</p>
                 
-                {/* TOMBOL LIHAT DETAIL - DIPAKAI <a> TAG */}
+                {/* TOMBOL LIHAT DETAIL - PAKAI A TAG AGAR PASTI JALAN */}
                 <a 
                   href={`/projects/${project.id}`} 
                   className="mt-4 inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-md text-sm font-medium hover:bg-blue-200 transition-colors cursor-pointer"
